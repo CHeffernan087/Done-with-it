@@ -19,6 +19,7 @@ import UICard from "./app/components/UICard";
 import SampleComponent from "./app/components/SampleComponent";
 import DetailsScreen from "./app/Screens/DetailsScreen";
 import MessagesScreen from "./app/Screens/MessagesScreen";
+import MyAccountScreen from "./app/Screens/MyAccountScreen";
 /*
 CMD + M => open developer tools
 */
@@ -28,7 +29,7 @@ export default function App() {
 	});
 	const { landscape } = useDeviceOrientation();
 	const loginScreen = false;
-	return <MessagesScreen />;
+	return <MyAccountScreen />;
 }
 
 const styles = StyleSheet.create({

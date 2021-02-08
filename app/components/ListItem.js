@@ -10,21 +10,40 @@ export default function ListItem({
 	subText,
 	onPress,
 	renderRightActions,
+	size,
+	Icon,
+	parentStyle,
 }) {
 	return (
 		<Swipeable renderRightActions={renderRightActions}>
 			<TouchableHighlight underlayColor={colors.lightGrey} onPress={onPress}>
-				<View style={styles.sellerDetails}>
-					<View style={[styles.profileDimensions, styles.profilePic]}>
-						<Image source={image} style={styles.profilePicImage} />
+				<View style={dynamicStyles({ parentStyle }).sellerDetails}>
+					<View
+						style={[
+							dynamicStyles({ size }).profileDimensions,
+							dynamicStyles({ size }).profilePic,
+						]}
+					>
+						{image ? (
+							<Image source={image} style={styles.profilePicImage} />
+						) : (
+							<Icon />
+						)}
 					</View>
-					<View style={[styles.profileDimensions, styles.profileDescription]}>
+					<View
+						style={[
+							dynamicStyles({ size }).profileDimensions,
+							styles.profileDescription,
+						]}
+					>
 						<AppText fontWeight="bold" size="sm">
 							{title}
 						</AppText>
-						<AppText size="sm" color="medium" marginTop={7.5}>
-							{subText}
-						</AppText>
+						{subText && (
+							<AppText size="sm" color="medium" marginTop={7.5}>
+								{subText}
+							</AppText>
+						)}
 					</View>
 				</View>
 			</TouchableHighlight>
@@ -35,30 +54,39 @@ export default function ListItem({
 const styles = StyleSheet.create({
 	detailsWrapper: {
 		flex: 6,
+		backgroundColor: colors.white,
 	},
 	profileDescription: {
 		flex: 1,
 		paddingLeft: 10,
 		alignItems: "flex-start",
+		justifyContent: "center",
 	},
-	profileDimensions: {
-		height: 60,
-	},
-	profilePic: {
-		width: 60,
-		height: 60,
-		borderRadius: 60,
-		overflow: "hidden",
-	},
+
 	profilePicImage: {
 		height: "100%",
 		width: "100%",
 	},
-
-	sellerDetails: {
-		flexDirection: "row",
-		alignItems: "center",
-		paddingLeft: 20,
-		height: 90,
-	},
 });
+
+const dynamicStyles = ({ size, parentStyle }) =>
+	StyleSheet.create({
+		sellerDetails: {
+			backgroundColor: colors.white,
+			flexDirection: "row",
+			alignItems: "center",
+			justifyContent: "center",
+			paddingLeft: 20,
+			height: 90,
+			...parentStyle,
+		},
+		profileDimensions: {
+			height: size === "sm" ? 45 : 60,
+		},
+		profilePic: {
+			width: size === "sm" ? 45 : 60,
+			height: size === "sm" ? 45 : 60,
+			borderRadius: size === "sm" ? 45 : 60,
+			overflow: "hidden",
+		},
+	});

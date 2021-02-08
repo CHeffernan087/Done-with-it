@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		paddingLeft: 20,
 		height: 90,
+		backgroundColor: "white",
 	},
 });

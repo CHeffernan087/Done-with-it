@@ -8,4 +8,5 @@ export default {
 	white: "#fff",
 	lightGrey: "#f8f4f4",
 	danger: "#ff5252",
+	yellow: "#ffe66d",
 };
