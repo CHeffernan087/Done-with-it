@@ -8,7 +8,6 @@ export default function UIScreen({ children, ...rest }) {
 }
 
 const styles = (props) => {
-	console.log("Here are the styles :", props);
 	return StyleSheet.create({
 		screen: {
 			flex: 1,

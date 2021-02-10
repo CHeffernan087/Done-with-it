@@ -1,6 +1,6 @@
 import React from "react";
-import { Platform, Text, StyleSheet } from "react-native";
-
+import { Text, StyleSheet } from "react-native";
+import defaultStyles from "../config/styles";
 import colors from "../config/colors";
 
 const textSizes = {
@@ -14,20 +14,14 @@ const textSizes = {
 };
 
 const AppText = ({ children, ...rest }) => {
-	return <Text style={[styles(rest).textStyle]}>{children}</Text>;
+	return (
+		<Text style={[styles(rest).textStyle, defaultStyles.text]}>{children}</Text>
+	);
 };
 
 const styles = ({ use, size, color, ...parentProps }) =>
 	StyleSheet.create({
 		textStyle: {
-			...Platform.select({
-				android: {
-					fontFamily: "roboto",
-				},
-				ios: {
-					fontFamily: "avenir",
-				},
-			}),
 			color:
 				color && colors[color]
 					? colors[color]

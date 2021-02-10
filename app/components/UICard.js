@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 		width: "90%",
 		alignSelf: "center",
 		borderRadius: 15,
-		marginVertical: 30,
+		marginVertical: 5,
 		overflow: "hidden",
 	},
 	imageWrapper: {

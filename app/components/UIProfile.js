@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingLeft: 10,
 		alignItems: "flex-start",
+		justifyContent: "center",
 	},
 	profileDimensions: {
 		height: 60,

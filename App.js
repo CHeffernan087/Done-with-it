@@ -20,6 +20,8 @@ import SampleComponent from "./app/components/SampleComponent";
 import DetailsScreen from "./app/Screens/DetailsScreen";
 import MessagesScreen from "./app/Screens/MessagesScreen";
 import MyAccountScreen from "./app/Screens/MyAccountScreen";
+import ListingsScreen from "./app/Screens/ListingsScreen";
+import UIInput from "./app/components/UIInput";
 /*
 CMD + M => open developer tools
 */
@@ -27,9 +29,8 @@ export default function App() {
 	useEffect(() => {
 		console.log(Dimensions.get("screen"));
 	});
-	const { landscape } = useDeviceOrientation();
-	const loginScreen = false;
-	return <MyAccountScreen />;
+
+	return <SampleComponent />;
 }
 
 const styles = StyleSheet.create({

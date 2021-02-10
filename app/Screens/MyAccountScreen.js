@@ -19,6 +19,7 @@ export default function MyAccountScreen() {
 				subText={"programmingwithmosh@gmail.com"}
 			/>
 			<FlatList
+				keyExtractor={(item) => item.title}
 				style={styles.flatListStyle}
 				data={[
 					{
