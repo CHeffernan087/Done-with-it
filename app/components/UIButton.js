@@ -5,7 +5,6 @@ import AppText from "./AppText";
 import colors from "../config/colors";
 
 export default function UIButton({ children, onPress = () => {}, ...rest }) {
-	console.log(rest);
 	return (
 		<TouchableOpacity style={styles(rest).buttonStyle} onPress={onPress}>
 			<AppText color="white" fontWeight="bold" size="sm">

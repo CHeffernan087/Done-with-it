@@ -37,9 +37,7 @@ export default function MessagesScreen() {
 						title={item.title}
 						subText={item.description}
 						image={item.image}
-						onPress={() => {
-							console.log("Hello my good man");
-						}}
+						onPress={() => {}}
 						renderRightActions={() => (
 							<UIListItemDeleteAction onPress={() => handleDelete(item)} />
 						)}

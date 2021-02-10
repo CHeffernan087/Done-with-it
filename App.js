@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	SafeAreaView,
 	StyleSheet,
@@ -22,15 +22,32 @@ import MessagesScreen from "./app/Screens/MessagesScreen";
 import MyAccountScreen from "./app/Screens/MyAccountScreen";
 import ListingsScreen from "./app/Screens/ListingsScreen";
 import UIInput from "./app/components/UIInput";
+import UIPicker from "./app/components/UIPicker";
+import UIScreen from "./app/components/UIScreen";
+import colors from "./app/config/colors";
 /*
 CMD + M => open developer tools
 */
-export default function App() {
-	useEffect(() => {
-		console.log(Dimensions.get("screen"));
-	});
 
-	return <SampleComponent />;
+const categories = [
+	{ label: "Furniture", value: 1 },
+	{ label: "Clothing", value: 2 },
+	{ label: "Cameras", value: 3 },
+];
+export default function App() {
+	const [category, setCategory] = useState(null);
+
+	return (
+		<UIScreen backgroundColor={colors.white}>
+			<UIPicker
+				items={categories}
+				icon="apps"
+				onSelectItem={setCategory}
+				placeholder="Category"
+				selectedItem={category}
+			/>
+		</UIScreen>
+	);
 }
 
 const styles = StyleSheet.create({
