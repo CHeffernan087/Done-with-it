@@ -1,77 +1,71 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
+import UIScreen from "../components/UIScreen";
+import UIInput from "../components/UIInput";
 import UIButton from "../components/UIButton";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import AppText from "../components/AppText";
 
-export default function LoginScreen() {
+const validationSchema = Yup.object().shape({
+	email: Yup.string().required().email().label("Email"),
+	password: Yup.string().required().min(4).label("Password"),
+});
+
+const LoginScreen = () => {
 	return (
-		<View style={styles.wrapper}>
-			<ImageBackground
-				blurRadius={2}
-				style={styles.backgroundImageStyles}
-				source={require("../assets/background.jpg")}
+		<UIScreen backgroundColor="white" padding={10}>
+			<Image style={styles.logo} source={require("../assets/logo-red.png")} />
+			<Formik
+				initialValues={{ email: "", password: "" }}
+				onSubmit={(values) => console.log(values)}
+				validationSchema={validationSchema}
 			>
-				<View style={styles.imageWrapper}>
-					<View style={styles.logoWrapper}>
-						<Image
-							style={styles.logoStyle}
-							source={require("../assets/logo-red.png")}
+				{({ handleChange, handleSubmit, errors }) => (
+					<>
+						<UIInput
+							onChangeText={handleChange("email")}
+							icon="email"
+							placeholder="Email"
+							autoCapitalize="none"
+							autoCorrect={false}
+							keyboardType="email-address"
+							textContentType="emailAddress"
 						/>
-						<Text style={styles.sloganStyle}>Sell what you don't need</Text>
-					</View>
-				</View>
-				<View style={styles.buttonWrapper}>
-					<UIButton
-						use="primary"
-						onPress={() => {
-							alert("Hey there");
-						}}
-					>
-						LOGIN
-					</UIButton>
-					<UIButton use="secondary" styles={{ marginTop: 15 }}>
-						REGISTER
-					</UIButton>
-				</View>
-			</ImageBackground>
-		</View>
+						<AppText color="primary">{errors.email}</AppText>
+						<UIInput
+							onChangeText={handleChange("password")}
+							icon="lock"
+							autoCapitalize="none"
+							autoCorrect={false}
+							secureTextEntry
+							placeholder="password"
+							textContentType="password"
+						/>
+						<AppText color="primary">{errors.password}</AppText>
+						<UIButton
+							use="primary"
+							color="white"
+							onPress={handleSubmit}
+							styles={{ marginTop: 20 }}
+						>
+							LOGIN
+						</UIButton>
+					</>
+				)}
+			</Formik>
+		</UIScreen>
 	);
-}
+};
 
 const styles = StyleSheet.create({
-	wrapper: {
-		flex: 1,
-	},
-	imageWrapper: {
-		flex: 7,
-		flexDirection: "row",
-		justifyContent: "center",
-	},
-	buttonWrapper: {
-		flex: 2,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-
-	logoWrapper: {
-		height: 100,
-		top: 100,
-		position: "absolute",
-		alignItems: "center",
-	},
-	backgroundImageStyles: {
-		flex: 1,
-		resizeMode: "stretch",
-	},
-	logoStyle: {
+	logo: {
 		width: 80,
 		height: 80,
-		aspectRatio: 1,
-	},
-	sloganStyle: {
-		marginTop: 20,
-		fontSize: 20,
-	},
-	registerButton: {
+		alignSelf: "center",
 		marginTop: 50,
+		marginBottom: 20,
 	},
 });
+
+export default LoginScreen;

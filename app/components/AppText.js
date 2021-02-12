@@ -15,7 +15,7 @@ const textSizes = {
 
 const AppText = ({ children, ...rest }) => {
 	return (
-		<Text style={[styles(rest).textStyle, defaultStyles.text]}>{children}</Text>
+		<Text style={[defaultStyles.text, styles(rest).textStyle]}>{children}</Text>
 	);
 };
 

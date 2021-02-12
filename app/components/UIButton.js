@@ -20,7 +20,7 @@ const styles = ({ use, styles }) =>
 			backgroundColor: colors[use],
 			borderRadius: 20,
 			height: 40,
-			width: "90%",
+			width: "100%",
 			alignItems: "center",
 			justifyContent: "center",
 			alignSelf: "center",

@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import UIPicker from "./app/components/UIPicker";
 import UIScreen from "./app/components/UIScreen";
 import colors from "./app/config/colors";
+import LoginScreen from "./app/Screens/LoginScreen";
 /*
 CMD + M => open developer tools
 */
@@ -16,17 +17,7 @@ const categories = [
 export default function App() {
 	const [category, setCategory] = useState(null);
 
-	return (
-		<UIScreen backgroundColor={colors.white}>
-			<UIPicker
-				items={categories}
-				icon="apps"
-				onSelectItem={setCategory}
-				placeholder="Category"
-				selectedItem={category}
-			/>
-		</UIScreen>
-	);
+	return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({});

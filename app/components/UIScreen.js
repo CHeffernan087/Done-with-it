@@ -13,6 +13,7 @@ const styles = (props) => {
 			flex: 1,
 			paddingTop: Constants.statusBarHeight,
 			backgroundColor: "yellow",
+
 			...props,
 		},
 	});
