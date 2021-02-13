@@ -6,6 +6,9 @@ import UIButton from "../components/UIButton";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import AppText from "../components/AppText";
+import UIErrorMessage from "../components/UIErrorMessage";
+import UIFormField from "../components/UIFormField";
+import UIFormSubmitButton from "../components/UIFormSubmitButton";
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().required().email().label("Email"),
@@ -21,10 +24,10 @@ const LoginScreen = () => {
 				onSubmit={(values) => console.log(values)}
 				validationSchema={validationSchema}
 			>
-				{({ handleChange, handleSubmit, errors }) => (
+				{() => (
 					<>
-						<UIInput
-							onChangeText={handleChange("email")}
+						<UIFormField
+							name="email"
 							icon="email"
 							placeholder="Email"
 							autoCapitalize="none"
@@ -32,25 +35,17 @@ const LoginScreen = () => {
 							keyboardType="email-address"
 							textContentType="emailAddress"
 						/>
-						<AppText color="primary">{errors.email}</AppText>
-						<UIInput
-							onChangeText={handleChange("password")}
-							icon="lock"
+						<UIFormField
 							autoCapitalize="none"
 							autoCorrect={false}
-							secureTextEntry
+							icon="lock"
+							name="email"
 							placeholder="password"
+							secureTextEntry
 							textContentType="password"
 						/>
-						<AppText color="primary">{errors.password}</AppText>
-						<UIButton
-							use="primary"
-							color="white"
-							onPress={handleSubmit}
-							styles={{ marginTop: 20 }}
-						>
-							LOGIN
-						</UIButton>
+
+						<UIFormSubmitButton title={"LOGIN"} />
 					</>
 				)}
 			</Formik>
