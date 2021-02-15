@@ -15,7 +15,7 @@ export default function UIInput({ icon, ...rest }) {
 					style={styles.icon}
 				/>
 			)}
-			<TextInput style={defaultStyles.text} {...rest} />
+			<TextInput style={[styles.inputStyle, defaultStyles.text]} {...rest} />
 		</View>
 	);
 }
@@ -27,10 +27,18 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
-		padding: 15,
+
 		marginVertical: 10,
 	},
 	icon: {
 		marginRight: 10,
+		padding: 15,
+		paddingRight: 5,
+	},
+	inputStyle: {
+		width: "100%",
+		height: "100%",
+		padding: 15,
+		paddingLeft: 0,
 	},
 });
