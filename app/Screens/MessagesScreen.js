@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import UIScreen from "../components/UIScreen";
-import UIListItemSeparator from "../components/UIListItemSeparator";
-import UIListItemDeleteAction from "../components/UIListItemDeleteAction";
+import {
+	ListItem,
+	UIListItemSeparator,
+	UIListItemDeleteAction,
+} from "../components/lists";
 
 export default function MessagesScreen() {
 	const [refreshing, setRefreshing] = useState(false);

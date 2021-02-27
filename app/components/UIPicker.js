@@ -36,7 +36,9 @@ export default function UIPicker({
 						/>
 					)}
 					<View style={styles.text}>
-						<AppText>{selectedItem ? selectedItem.label : placeholder}</AppText>
+						<AppText color={!selectedItem ? "medium" : null}>
+							{selectedItem ? selectedItem.label : placeholder}
+						</AppText>
 					</View>
 					<MaterialCommunityIcons
 						name="chevron-down"
