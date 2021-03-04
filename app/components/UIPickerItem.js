@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppText from "./AppText";
 
-export default function UIPickerItem({ label, onPress }) {
+export default function UIPickerItem({ item, onPress }) {
 	return (
 		<TouchableOpacity onPress={onPress}>
-			<AppText padding={20}>{label}</AppText>
+			<AppText padding={20}>{item.label}</AppText>
 		</TouchableOpacity>
 	);
 }

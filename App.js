@@ -13,7 +13,7 @@ export default function App() {
 
 	const handleDelete = () => {};
 
-	return <MessagesScreen />;
+	return <ListingEditScreen />;
 }
 
 const styles = StyleSheet.create({});

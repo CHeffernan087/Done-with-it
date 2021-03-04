@@ -17,16 +17,19 @@ import UIPickerItem from "./UIPickerItem";
 export default function UIPicker({
 	icon,
 	items,
+	numColumns = 1,
 	onSelectItem,
 	placeholder,
+	PickerItemComponent = UIPickerItem,
 	selectedItem,
+	width = "100%",
 }) {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
 		<View>
 			<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-				<View style={styles.container}>
+				<View style={[styles.container, { width }]}>
 					{icon && (
 						<MaterialCommunityIcons
 							name={icon}
@@ -57,13 +60,13 @@ export default function UIPicker({
 					></Button>
 					<FlatList
 						data={items}
+						numColumns={numColumns}
 						keyExtractor={(item) => item.value.toString()}
 						renderItem={({ item }) => (
-							<UIPickerItem
-								label={item.label}
+							<PickerItemComponent
+								item={item}
 								onPress={() => {
 									setModalVisible(false);
-
 									onSelectItem(item);
 								}}
 							/>

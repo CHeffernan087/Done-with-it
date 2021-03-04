@@ -13,8 +13,10 @@ export default function MessagesScreen() {
 	const [messages, updateMessages] = useState([
 		{
 			id: 1,
-			title: "T1",
-			description: "D1",
+			title:
+				"Oh lord my god when I in awesome wonder consider all the worlds thy hands have made. I see the stars I hear the rolling thunder, thy power throughout the universe displayed",
+			description:
+				"Then sings my soul my saviour god to thee. How great thou art, how great thou art",
 			image: require("../assets/mosh.jpg"),
 		},
 		{
@@ -30,19 +32,20 @@ export default function MessagesScreen() {
 		updateMessages(newMessages);
 	};
 	return (
-		<UIScreen>
+		<UIScreen backgroundColor="white">
 			<FlatList
 				data={messages}
 				keyExtractor={(message) => message.id.toString()}
 				renderItem={({ item }) => (
 					<ListItem
-						title={item.title}
-						subText={item.description}
 						image={item.image}
 						onPress={() => {}}
 						renderRightActions={() => (
 							<UIListItemDeleteAction onPress={() => handleDelete(item)} />
 						)}
+						showChevrons={true}
+						subText={item.description}
+						title={item.title}
 					/>
 				)}
 				refreshing={refreshing}

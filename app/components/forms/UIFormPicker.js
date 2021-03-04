@@ -8,8 +8,11 @@ export default function UIFormPicker({
 	errorVisible,
 	items,
 	name,
-	selectedItem,
 	onSelectItem,
+	numColumns,
+	PickerItemComponent,
+	selectedItem,
+	width,
 	...rest
 }) {
 	const { setFieldValue, values } = useFormikContext();
@@ -20,9 +23,12 @@ export default function UIFormPicker({
 	return (
 		<>
 			<UIPicker
-				onSelectItem={handleSelect}
 				items={items}
+				onSelectItem={handleSelect}
+				numColumns={numColumns}
 				selectedItem={values["category"]}
+				PickerItemComponent={PickerItemComponent}
+				width={width}
 				{...rest}
 			/>
 			<UIErrorMessage visible={errorVisible} />

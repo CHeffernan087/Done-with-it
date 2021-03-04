@@ -3,48 +3,58 @@ import { StyleSheet, Image, View, TouchableHighlight } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import colors from "../../config/colors";
 import AppText from "../AppText";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ListItem({
+	Icon,
 	image,
-	title,
 	subText,
 	onPress,
 	renderRightActions,
 	size,
-	Icon,
+	showChevrons,
 	parentStyle,
+	title,
 }) {
 	return (
 		<Swipeable renderRightActions={renderRightActions}>
 			<TouchableHighlight underlayColor={colors.lightGrey} onPress={onPress}>
 				<View style={dynamicStyles({ parentStyle }).sellerDetails}>
-					<View
-						style={[
-							dynamicStyles({ size }).profileDimensions,
-							dynamicStyles({ size }).profilePic,
-						]}
-					>
+					<View style={[dynamicStyles({ size }).profilePic]}>
 						{image ? (
 							<Image source={image} style={styles.profilePicImage} />
 						) : (
 							<Icon />
 						)}
 					</View>
-					<View
-						style={[
-							dynamicStyles({ size }).profileDimensions,
-							styles.profileDescription,
-						]}
-					>
-						<AppText fontWeight="bold" size="sm">
+					<View style={[styles.profileDescription]}>
+						<AppText
+							textProps={{ numberOfLines: 1 }}
+							fontWeight="bold"
+							size="sm"
+						>
 							{title}
 						</AppText>
 						{subText && (
-							<AppText size="sm" color="medium" marginTop={7.5}>
+							<AppText
+								textProps={{ numberOfLines: 2 }}
+								size="sm"
+								color="medium"
+								marginTop={4}
+							>
 								{subText}
 							</AppText>
 						)}
 					</View>
+					{showChevrons && (
+						<View style={styles.chevronWrapper}>
+							<MaterialCommunityIcons
+								name="chevron-right"
+								color={colors.medium}
+								size={25}
+							/>
+						</View>
+					)}
 				</View>
 			</TouchableHighlight>
 		</Swipeable>
@@ -52,10 +62,12 @@ export default function ListItem({
 }
 
 const styles = StyleSheet.create({
-	detailsWrapper: {
-		flex: 6,
-		backgroundColor: colors.white,
+	chevronWrapper: {
+		width: 60,
+		alignItems: "center",
+		justifyContent: "center",
 	},
+
 	profileDescription: {
 		flex: 1,
 		paddingLeft: 10,
@@ -76,17 +88,14 @@ const dynamicStyles = ({ size, parentStyle }) =>
 			flexDirection: "row",
 			alignItems: "center",
 			justifyContent: "center",
+			paddingVertical: 10,
 			paddingLeft: 20,
-			height: 90,
-			...parentStyle,
 		},
-		profileDimensions: {
-			height: size === "sm" ? 45 : 60,
-		},
+
 		profilePic: {
-			width: size === "sm" ? 45 : 60,
-			height: size === "sm" ? 45 : 60,
-			borderRadius: size === "sm" ? 45 : 60,
+			width: 60,
+			height: 60,
+			borderRadius: 60,
 			overflow: "hidden",
 		},
 	});

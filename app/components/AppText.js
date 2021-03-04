@@ -13,9 +13,11 @@ const textSizes = {
 	l: 26,
 };
 
-const AppText = ({ children, ...rest }) => {
+const AppText = ({ children, textProps, ...rest }) => {
 	return (
-		<Text style={[defaultStyles.text, styles(rest).textStyle]}>{children}</Text>
+		<Text {...textProps} style={[defaultStyles.text, styles(rest).textStyle]}>
+			{children}
+		</Text>
 	);
 };
 
@@ -31,6 +33,7 @@ const styles = ({ use, size, color, ...parentProps }) =>
 						: colors.secondary
 					: colors.black,
 			fontSize: textSizes[size] ? textSizes[size] : textSizes["medium"],
+
 			...parentProps,
 		},
 	});

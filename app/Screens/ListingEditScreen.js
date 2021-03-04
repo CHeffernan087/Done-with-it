@@ -5,6 +5,8 @@ import UIScreen from "../components/UIScreen";
 import * as Yup from "yup";
 import { UIForm, UIFormField, UIFormSubmitButton } from "../components/forms";
 import UIFormPicker from "../components/forms/UIFormPicker";
+import UICategoryPickerItem from "../components/UICategoryPickerItem";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
 	category: Yup.object().required().nullable().label("Category"),
@@ -13,9 +15,60 @@ const validationSchema = Yup.object().shape({
 	description: Yup.string(),
 });
 const categories = [
-	{ label: "Furniture", value: 1 },
-	{ label: "Clothing", value: 2 },
-	{ label: "Cameras", value: 3 },
+	{
+		label: "Furniture",
+		value: 1,
+		backgroundColor: colors.primary,
+		icon: "floor-lamp",
+	},
+	{
+		label: "Cars",
+		value: 2,
+		backgroundColor: colors.orange,
+		icon: "car",
+	},
+	{
+		label: "Cameras",
+		value: 3,
+		backgroundColor: colors.yellow,
+		icon: "camera",
+	},
+	{
+		label: "Games",
+		value: 1,
+		backgroundColor: colors.green,
+		icon: "cards",
+	},
+	{
+		label: "Clothing",
+		value: 2,
+		backgroundColor: colors.turquise,
+		icon: "shoe-heel",
+	},
+	{
+		label: "Sports",
+		value: 3,
+		backgroundColor: colors.sportsBlue,
+		icon: "basketball",
+	},
+	{
+		label: "Movies and Music",
+		value: 1,
+		backgroundColor: colors.deepBlue,
+		icon: "headphones",
+	},
+	{
+		label: "Books",
+		value: 2,
+		backgroundColor: colors.purple,
+		icon: "book-open",
+	},
+	{
+		label: "Other",
+		value: 3,
+		backgroundColor: colors.medium,
+		icon: "note",
+	},
 ];
 export default function ListingEditScreen() {
 	const [category, setCategory] = useState(null);
@@ -33,15 +86,23 @@ export default function ListingEditScreen() {
 					autoCapitalize="words"
 					autoCorrect={false}
 				/>
-				<UIFormField name="price" placeholder="Price" keyboardType="numeric" />
+				<UIFormField
+					name="price"
+					placeholder="Price"
+					keyboardType="numeric"
+					width={160}
+				/>
 				<UIFormPicker
-					placeholder="Category"
-					name="category"
-					items={categories}
 					error="You must select a category"
 					errorVisible={true}
-					selectedItem={category}
+					items={categories}
+					name="category"
 					onSelectItem={setCategory}
+					PickerItemComponent={UICategoryPickerItem}
+					placeholder="Category"
+					selectedItem={category}
+					numColumns={3}
+					width={180}
 				/>
 				<UIFormField
 					name="description"

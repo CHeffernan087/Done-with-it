@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import UIErrorMessage from "./UIErrorMessage";
 import UIInput from "../UIInput";
 
-export default function UIFormField({ name, ...otherProps }) {
+export default function UIFormField({ name, width, ...otherProps }) {
 	const { handleChange, errors, touched, setFieldTouched } = useFormikContext();
 	return (
 		<>
@@ -12,6 +12,7 @@ export default function UIFormField({ name, ...otherProps }) {
 				onChangeText={handleChange(name)}
 				{...otherProps}
 				onBlur={() => setFieldTouched(name)}
+				width={width}
 			/>
 
 			<UIErrorMessage error={errors[name]} visible={touched[name]} />
