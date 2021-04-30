@@ -4,6 +4,8 @@ import { StyleSheet, TouchableOpacity, Alert } from "react-native";
 import colors from "../../config/colors";
 import UIImagePickerContent from "../imagePicker/UIImagePickerContent";
 import UIAlert from "../UIAlert";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 /*
 CMD + M => open developer tools
@@ -62,6 +64,7 @@ export default function UIImagePicker({ onSelect, onDelete, uri }) {
 					onConfirm={() => {
 						updateDeleteState(false);
 						setUri(null);
+						setBackupUri(null);
 						onDelete(uri);
 					}}
 					onCancel={() => {

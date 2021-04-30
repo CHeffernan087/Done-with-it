@@ -7,12 +7,15 @@ import { UIForm, UIFormField, UIFormSubmitButton } from "../components/forms";
 import UIFormPicker from "../components/forms/UIFormPicker";
 import UICategoryPickerItem from "../components/UICategoryPickerItem";
 import colors from "../config/colors";
+import UIImagePickerList from "../components/imagePicker/UIImagePickerList";
+import UIFormImagePicker from "../components/forms/UIFormImagePicker";
 
 const validationSchema = Yup.object().shape({
 	category: Yup.object().required().nullable().label("Category"),
 	title: Yup.string().required().label("Email"),
 	price: Yup.number().positive().min(1).max(10000).required().label("Price"),
 	description: Yup.string(),
+	image: Yup.array().min(1),
 });
 const categories = [
 	{
@@ -72,14 +75,29 @@ const categories = [
 ];
 export default function ListingEditScreen() {
 	const [category, setCategory] = useState(null);
+	const [imageUris, setImageUris] = useState([]);
 
 	return (
 		<UIScreen backgroundColor="white" paddingHorizontal={10}>
 			<UIForm
-				initialValues={{ category, title: "", price: null, description: "" }}
+				initialValues={{
+					category,
+					title: "",
+					price: null,
+					description: "",
+					image: [],
+				}}
 				onSubmit={() => {}}
 				validationSchema={validationSchema}
 			>
+				<UIFormImagePicker
+					error="You must choose at least one image"
+					items={categories}
+					name="image"
+					onSelectItem={setCategory}
+					PickerItemComponent={UIImagePickerList}
+					placeholder="Images"
+				/>
 				<UIFormField
 					name="title"
 					placeholder="Title"
