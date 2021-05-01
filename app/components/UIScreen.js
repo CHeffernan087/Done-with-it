@@ -12,7 +12,7 @@ const styles = (props) => {
 		screen: {
 			flex: 1,
 			paddingTop: Constants.statusBarHeight,
-			backgroundColor: "yellow",
+			backgroundColor: "white",
 
 			...props,
 		},

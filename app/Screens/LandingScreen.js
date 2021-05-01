@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
 import UIButton from "../components/UIButton";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
 	return (
 		<View style={styles.wrapper}>
 			<ImageBackground
@@ -21,14 +21,21 @@ export default function LoginScreen() {
 				</View>
 				<View style={styles.buttonWrapper}>
 					<UIButton
+						styles={{ height: 50, borderRadius: 30 }}
 						use="primary"
 						onPress={() => {
-							alert("Hey there");
+							navigation.navigate("LoginScreen");
 						}}
 					>
 						LOGIN
 					</UIButton>
-					<UIButton use="secondary" styles={{ marginTop: 15 }}>
+					<UIButton
+						use="secondary"
+						styles={{ marginTop: 15, height: 50, borderRadius: 30 }}
+						onPress={() => {
+							navigation.navigate("RegisterScreen");
+						}}
+					>
 						REGISTER
 					</UIButton>
 				</View>
@@ -50,6 +57,7 @@ const styles = StyleSheet.create({
 		flex: 2,
 		alignItems: "center",
 		justifyContent: "center",
+		paddingHorizontal: 30,
 	},
 
 	logoWrapper: {
@@ -69,7 +77,8 @@ const styles = StyleSheet.create({
 	},
 	sloganStyle: {
 		marginTop: 20,
-		fontSize: 20,
+		fontSize: 23.5,
+		fontWeight: "bold",
 	},
 	registerButton: {
 		marginTop: 50,

@@ -23,10 +23,7 @@ export default function ListingsScreen() {
 	const [items, setItems] = useState(defaultItems);
 
 	return (
-		<UIScreen
-			backgroundColor={colors.beige}
-			style={{ backgroundColor: colors.beige }}
-		>
+		<UIScreen backgroundColor={colors.beige}>
 			<FlatList
 				data={items}
 				keyExtractor={(item) => item.id.toString()}

@@ -12,7 +12,7 @@ const validationSchema = Yup.object().shape({
 
 export default function RegisterScreen() {
 	return (
-		<UIScreen backgroundColor="white" padding={10}>
+		<UIScreen backgroundColor="white" padding={15}>
 			<UIForm
 				initialValues={{ email: "", password: "", name: "" }}
 				onSubmit={(values) => console.log(values)}

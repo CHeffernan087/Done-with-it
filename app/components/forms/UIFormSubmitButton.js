@@ -10,7 +10,7 @@ export default function UIFormSubmitButton({ title }) {
 			use="primary"
 			color="white"
 			onPress={handleSubmit}
-			styles={{ marginTop: 20, height: 45, borderRadius: 22 }}
+			styles={{ marginTop: 20, height: 50, borderRadius: 22 }}
 		>
 			{title}
 		</UIButton>
