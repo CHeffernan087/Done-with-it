@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import UIPicker from "../components/UIPicker";
 import UIScreen from "../components/UIScreen";
 import * as Yup from "yup";
 import { UIForm, UIFormField, UIFormSubmitButton } from "../components/forms";
@@ -9,6 +8,7 @@ import UICategoryPickerItem from "../components/UICategoryPickerItem";
 import colors from "../config/colors";
 import UIImagePickerList from "../components/imagePicker/UIImagePickerList";
 import UIFormImagePicker from "../components/forms/UIFormImagePicker";
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
 	category: Yup.object().required().nullable().label("Category"),
@@ -77,6 +77,8 @@ export default function ListingEditScreen() {
 	const [category, setCategory] = useState(null);
 	const [imageUris, setImageUris] = useState([]);
 
+	const location = useLocation();
+
 	return (
 		<UIScreen backgroundColor="white" paddingHorizontal={10}>
 			<UIForm
@@ -87,7 +89,9 @@ export default function ListingEditScreen() {
 					description: "",
 					image: [],
 				}}
-				onSubmit={() => {}}
+				onSubmit={() => {
+					console.log(location);
+				}}
 				validationSchema={validationSchema}
 			>
 				<UIFormImagePicker
