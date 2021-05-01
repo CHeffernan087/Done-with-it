@@ -9,6 +9,8 @@ import colors from "../config/colors";
 import ListingEditScreen from "../Screens/ListingEditScreen";
 import ListingScreen from "../Screens/ListingsScreen";
 import MyAccountScreen from "../Screens/MyAccountScreen";
+import FeedNavigator from "./FeedNavigator";
+import AccountNavigator from "./AccountNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +27,7 @@ export default function AuthedRouter() {
 		>
 			<Tab.Screen
 				name="Feed"
-				component={ListingScreen}
+				component={FeedNavigator}
 				options={{
 					tabBarIcon: ({ size, color }) => (
 						<MaterialCommunityIcons name="home" size={size} color={color} />
@@ -76,7 +78,7 @@ export default function AuthedRouter() {
 			/>
 			<Tab.Screen
 				name="Account"
-				component={MyAccountScreen}
+				component={AccountNavigator}
 				options={{
 					tabBarIcon: ({ size, color }) => (
 						<MaterialCommunityIcons name="account" size={size} color={color} />

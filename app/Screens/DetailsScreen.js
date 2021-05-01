@@ -2,21 +2,21 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import AppText from "../components/AppText";
 import UIProfile from "../components/UIProfile";
+import UIScreen from "../components/UIScreen";
 
-export default function DetailsScreen() {
+export default function DetailsScreen({ route }) {
+	const listing = route.params.item;
+	console.log(listing);
 	return (
-		<View style={styles.screenWrapper}>
+		<UIScreen>
 			<View style={styles.imageWrapper}>
-				<Image
-					source={require("../assets/jacket.jpg")}
-					style={styles.mainImageStyle}
-				/>
+				<Image source={listing.image} style={styles.mainImageStyle} />
 			</View>
 			<View style={styles.detailsWrapper}>
 				<View style={styles.descriptionWrapper}>
-					<AppText fontWeight="bold">Red jacket for sale</AppText>
+					<AppText fontWeight="bold">{listing.description}</AppText>
 					<AppText use="secondary" size="sm">
-						$100
+						${listing.price}
 					</AppText>
 				</View>
 				<UIProfile
@@ -25,7 +25,7 @@ export default function DetailsScreen() {
 					image={require("../assets/mosh.jpg")}
 				/>
 			</View>
-		</View>
+		</UIScreen>
 	);
 }
 
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "tomato",
 	},
 	mainImageStyle: {
+		width: "100%",
 		flex: 1,
 	},
 	profileDescription: {

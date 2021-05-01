@@ -1,14 +1,22 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import {
+	ImageBackground,
+	StyleSheet,
+	Text,
+	View,
+	Image,
+	TouchableOpacity,
+} from "react-native";
 import AppText from "./AppText";
 
 export default function UICard({
 	image,
 	description = "Red jacket for sale",
 	price = 200,
+	onPress,
 }) {
 	return (
-		<View style={styles.cardWrapper}>
+		<TouchableOpacity style={styles.cardWrapper} onPress={onPress}>
 			<View style={styles.imageWrapper}>
 				<Image style={styles.mainImageStyle} source={image} />
 			</View>
@@ -18,7 +26,7 @@ export default function UICard({
 					${price}
 				</AppText>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 }
 

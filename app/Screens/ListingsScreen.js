@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import UICard from "../components/UICard";
 import UIScreen from "../components/UIScreen";
 import colors from "../config/colors";
+import { useNavigation } from "@react-navigation/native";
 
 const defaultItems = [
 	{
@@ -21,6 +22,7 @@ const defaultItems = [
 
 export default function ListingsScreen() {
 	const [items, setItems] = useState(defaultItems);
+	const navigation = useNavigation();
 
 	return (
 		<UIScreen backgroundColor={colors.beige}>
@@ -32,6 +34,9 @@ export default function ListingsScreen() {
 						price={item.price}
 						description={item.description}
 						image={item.image}
+						onPress={() => {
+							navigation.navigate("DetailsScreen", { item });
+						}}
 					/>
 				)}
 			/>

@@ -8,8 +8,10 @@ import colors from "../config/colors";
 import UIListIcon from "../components/UIListIcon";
 import { FlatList } from "react-native-gesture-handler";
 import UIListItemSeparator from "../components/lists/UIListItemSeparator";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MyAccountScreen() {
+	const navigator = useNavigation();
 	const iconProps = { size: 30, color: colors.white };
 	return (
 		<UIScreen backgroundColor={colors.beige}>
@@ -28,12 +30,18 @@ export default function MyAccountScreen() {
 							name: "format-list-bulleted",
 							backgroundColor: colors.primary,
 						},
+						onPress: () => {
+							navigator.navigate("ListingScreen");
+						},
 					},
 					{
 						title: "My Messages",
 						icon: {
 							name: "email",
 							backgroundColor: colors.secondary,
+						},
+						onPress: () => {
+							navigator.navigate("MessagesScreen");
 						},
 					},
 					{
@@ -42,6 +50,7 @@ export default function MyAccountScreen() {
 							name: "logout",
 							backgroundColor: colors.yellow,
 						},
+						onPress: () => {},
 					},
 				]}
 				renderItem={({ item }) => (
@@ -58,6 +67,7 @@ export default function MyAccountScreen() {
 						)}
 						title={item.title}
 						size="sm"
+						onPress={item.onPress}
 					/>
 				)}
 				ItemSeparatorComponent={UIListItemSeparator}
