@@ -9,6 +9,7 @@ import UIListIcon from "../components/UIListIcon";
 import { FlatList } from "react-native-gesture-handler";
 import UIListItemSeparator from "../components/lists/UIListItemSeparator";
 import { useNavigation } from "@react-navigation/native";
+import routes from "../routers/routes";
 
 export default function MyAccountScreen() {
 	const navigator = useNavigation();
@@ -31,7 +32,7 @@ export default function MyAccountScreen() {
 							backgroundColor: colors.primary,
 						},
 						onPress: () => {
-							navigator.navigate("ListingScreen");
+							navigator.navigate(routes.FEED);
 						},
 					},
 					{
@@ -41,7 +42,7 @@ export default function MyAccountScreen() {
 							backgroundColor: colors.secondary,
 						},
 						onPress: () => {
-							navigator.navigate("MessagesScreen");
+							navigator.navigate(routes.MESSAGES);
 						},
 					},
 					{

@@ -4,6 +4,7 @@ import UICard from "../components/UICard";
 import UIScreen from "../components/UIScreen";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/native";
+import routes from "../routers/routes";
 
 const defaultItems = [
 	{
@@ -35,7 +36,7 @@ export default function ListingsScreen() {
 						description={item.description}
 						image={item.image}
 						onPress={() => {
-							navigation.navigate("DetailsScreen", { item });
+							navigation.navigate(routes.LISTING_DETAILS, { item });
 						}}
 					/>
 				)}

@@ -1,16 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
+import routes from "./routes";
 
 /* Screen Components */
 import ListingEditScreen from "../Screens/ListingEditScreen";
-import ListingScreen from "../Screens/ListingsScreen";
-import MyAccountScreen from "../Screens/MyAccountScreen";
 import FeedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
+import NewListingButton from "./NewListingButton";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,60 +25,36 @@ export default function AuthedRouter() {
 			}}
 		>
 			<Tab.Screen
-				name="Feed"
+				name={routes.FEED}
 				component={FeedNavigator}
 				options={{
+					title: "Feed",
 					tabBarIcon: ({ size, color }) => (
 						<MaterialCommunityIcons name="home" size={size} color={color} />
 					),
 				}}
 			/>
 			<Tab.Screen
-				name="ListingEditScreen"
+				name={routes.LISTING_EDIT}
 				component={ListingEditScreen}
-				options={{
-					tabBarIcon: ({ size, color }) => (
-						<View
-							style={{
-								height: 70,
-								width: 70,
-								backgroundColor: colors.primary,
-								borderRadius: 50,
-								top: -15,
-								borderWidth: 5,
-								borderColor: "white",
-								alignItems: "center",
-								justifyContent: "center",
+				options={({ navigation }) => ({
+					tabBarButton: ({ size, color }) => (
+						<NewListingButton
+							onPress={() => {
+								navigation.navigate(routes.LISTING_EDIT);
 							}}
-						>
-							<View
-								style={{
-									height: 35,
-									width: 35,
-									backgroundColor: "white",
-									borderRadius: 35,
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<MaterialCommunityIcons
-									name="plus"
-									size={size}
-									color={colors.primary}
-								/>
-							</View>
-						</View>
+						/>
 					),
-					tabBarLabel: () => {},
-				}}
+				})}
 				showLabel={false}
 				labeled={false}
 				labelStyle={{ fontSize: 50 }}
 			/>
 			<Tab.Screen
-				name="Account"
+				name={routes.MY_ACCOUNT}
 				component={AccountNavigator}
 				options={{
+					title: "Account",
 					tabBarIcon: ({ size, color }) => (
 						<MaterialCommunityIcons name="account" size={size} color={color} />
 					),
