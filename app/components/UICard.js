@@ -10,7 +10,7 @@ import {
 import AppText from "./AppText";
 
 export default function UICard({
-	image,
+	imageUrl,
 	description = "Red jacket for sale",
 	price = 200,
 	onPress,
@@ -18,7 +18,7 @@ export default function UICard({
 	return (
 		<TouchableOpacity style={styles.cardWrapper} onPress={onPress}>
 			<View style={styles.imageWrapper}>
-				<Image style={styles.mainImageStyle} source={image} />
+				<Image style={styles.mainImageStyle} source={{ uri: imageUrl }} />
 			</View>
 			<View style={styles.priceDetails}>
 				<AppText size="small">{description}</AppText>

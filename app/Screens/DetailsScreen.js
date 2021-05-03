@@ -10,11 +10,14 @@ export default function DetailsScreen({ route }) {
 	return (
 		<UIScreen>
 			<View style={styles.imageWrapper}>
-				<Image source={listing.image} style={styles.mainImageStyle} />
+				<Image
+					source={{ uri: listing.images[0].url }}
+					style={styles.mainImageStyle}
+				/>
 			</View>
 			<View style={styles.detailsWrapper}>
 				<View style={styles.descriptionWrapper}>
-					<AppText fontWeight="bold">{listing.description}</AppText>
+					<AppText fontWeight="bold">{listing.title}</AppText>
 					<AppText use="secondary" size="sm">
 						${listing.price}
 					</AppText>

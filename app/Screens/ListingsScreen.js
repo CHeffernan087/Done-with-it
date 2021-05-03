@@ -1,46 +1,77 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+	ActivityIndicator,
+	ActivityIndicatorComponent,
+	FlatList,
+	StyleSheet,
+	Text,
+	View,
+} from "react-native";
 import UICard from "../components/UICard";
 import UIScreen from "../components/UIScreen";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../routers/routes";
-
-const defaultItems = [
-	{
-		id: 1,
-		description: "Red jacket for sale",
-		price: 200,
-		image: require("../assets/jacket.jpg"),
-	},
-	{
-		id: 2,
-		description: "Couch in great condition",
-		price: 1000,
-		image: require("../assets/couch.jpg"),
-	},
-];
+import listingsApi from "../api/listings";
+import AppText from "../components/AppText";
+import UIButton from "../components/UIButton";
+import UIActivityLoader from "../components/UIActivityLoader";
+import useApi from "../hooks/useApi";
 
 export default function ListingsScreen() {
-	const [items, setItems] = useState(defaultItems);
 	const navigation = useNavigation();
 
+	const { data: listings, error, loading } = useApi(listingsApi.getListings);
+
 	return (
-		<UIScreen backgroundColor={colors.beige}>
-			<FlatList
-				data={items}
-				keyExtractor={(item) => item.id.toString()}
-				renderItem={({ item, index }) => (
-					<UICard
-						price={item.price}
-						description={item.description}
-						image={item.image}
-						onPress={() => {
-							navigation.navigate(routes.LISTING_DETAILS, { item });
-						}}
+		<UIScreen backgroundColor={colors.beige} flexDirection="row">
+			{loading ? (
+				<View
+					style={{
+						flex: 1,
+						alignContent: "center",
+						justifyContent: "center",
+						flexDirection: "row",
+					}}
+				>
+					<UIActivityLoader visible={true} />
+				</View>
+			) : error ? (
+				<View
+					style={{
+						alignItems: "center",
+						justifyContent: "center",
+						flex: 1,
+					}}
+				>
+					<AppText>There was an error fetching the listings</AppText>
+					<UIButton
+						use="secondary"
+						color="white"
+						styles={{ marginTop: 20, height: 50, width: 80, borderRadius: 22 }}
+						onPress={loadListings}
+					>
+						Retry
+					</UIButton>
+				</View>
+			) : (
+				<>
+					<FlatList
+						data={listings}
+						keyExtractor={(item) => item.id.toString()}
+						renderItem={({ item, index }) => (
+							<UICard
+								price={item.price}
+								description={item.title}
+								imageUrl={item.images[0].url}
+								onPress={() => {
+									navigation.navigate(routes.LISTING_DETAILS, { item });
+								}}
+							/>
+						)}
 					/>
-				)}
-			/>
+				</>
+			)}
 		</UIScreen>
 	);
 }
