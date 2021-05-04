@@ -61,9 +61,10 @@ export default function UIPicker({
 					<FlatList
 						data={items}
 						numColumns={numColumns}
-						keyExtractor={(item) => item.value.toString()}
-						renderItem={({ item }) => (
+						keyExtractor={(item, index) => index}
+						renderItem={({ item, index }) => (
 							<PickerItemComponent
+								key={index}
 								item={item}
 								onPress={() => {
 									setModalVisible(false);

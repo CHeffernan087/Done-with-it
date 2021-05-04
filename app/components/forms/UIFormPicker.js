@@ -26,7 +26,7 @@ export default function UIFormPicker({
 				items={items}
 				onSelectItem={handleSelect}
 				numColumns={numColumns}
-				selectedItem={values["category"]}
+				selectedItem={values[name]}
 				PickerItemComponent={PickerItemComponent}
 				width={width}
 				{...rest}

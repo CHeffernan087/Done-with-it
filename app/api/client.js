@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 
 const apiClient = create({
-	baseURL: "http://192.168.8.159:9000/api",
+	baseURL: "https://done-with-it-backend-087.herokuapp.com/api",
 });
 
 // apiClient.get("/listings").then((response) => {

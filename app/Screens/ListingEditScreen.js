@@ -9,6 +9,9 @@ import colors from "../config/colors";
 import UIImagePickerList from "../components/imagePicker/UIImagePickerList";
 import UIFormImagePicker from "../components/forms/UIFormImagePicker";
 import useLocation from "../hooks/useLocation";
+import useApi from "../hooks/useApi";
+import listingsApi from "../api/listings";
+import AppText from "../components/AppText";
 
 const validationSchema = Yup.object().shape({
 	category: Yup.object().required().nullable().label("Category"),
@@ -78,6 +81,22 @@ export default function ListingEditScreen() {
 	const [imageUris, setImageUris] = useState([]);
 
 	const location = useLocation();
+	const { data, loading, error, request: postListing } = useApi(
+		listingsApi.uploadListing,
+		true
+	);
+
+	const submitForm = (formSubmission) => {
+		const data = { ...formSubmission };
+		data.categoryId = formSubmission.category.value;
+		postListing(data, (progress) => {
+			console.log(progress);
+		});
+	};
+
+	useEffect(() => {
+		error && console.log(error);
+	}, [error]);
 
 	return (
 		<UIScreen backgroundColor="white" paddingHorizontal={10}>
@@ -89,9 +108,7 @@ export default function ListingEditScreen() {
 					description: "",
 					image: [],
 				}}
-				onSubmit={() => {
-					console.log(location);
-				}}
+				onSubmit={submitForm}
 				validationSchema={validationSchema}
 			>
 				<UIFormImagePicker
@@ -135,6 +152,11 @@ export default function ListingEditScreen() {
 
 				<UIFormSubmitButton title={"POST"} />
 			</UIForm>
+			{data && (
+				<>
+					<AppText>It's a mother fucking success!</AppText>
+				</>
+			)}
 		</UIScreen>
 	);
 }
