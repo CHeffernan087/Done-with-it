@@ -38,7 +38,7 @@ const uploadListing = (listingObject, updateUploadProgress) => {
 
 	return client.post(endpoint, formData, {
 		onUploadProgress: (progress) =>
-			updateUploadProgress((progress.loaded * 100) / progress.total),
+			updateUploadProgress(progress.loaded / progress.total),
 	});
 };
 

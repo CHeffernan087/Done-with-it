@@ -5,11 +5,19 @@ import UIErrorMessage from "./UIErrorMessage";
 import UIInput from "../UIInput";
 
 export default function UIFormField({ name, width, ...otherProps }) {
-	const { handleChange, errors, touched, setFieldTouched } = useFormikContext();
+	const {
+		handleChange,
+		errors,
+		touched,
+		setFieldTouched,
+		setFieldValue,
+		values,
+	} = useFormikContext();
 	return (
 		<>
 			<UIInput
-				onChangeText={handleChange(name)}
+				onChangeText={(text) => setFieldValue(name, text)}
+				value={values[name]}
 				{...otherProps}
 				onBlur={() => setFieldTouched(name)}
 				width={width}

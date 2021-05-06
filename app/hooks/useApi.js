@@ -25,6 +25,7 @@ export default function useApi(apiFunc, defer) {
 			setData(response.data);
 			setLoading(false);
 		}
+		return response;
 	};
 
 	return { data, error, loading, request };

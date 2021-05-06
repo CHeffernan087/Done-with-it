@@ -12,6 +12,7 @@ import useLocation from "../hooks/useLocation";
 import useApi from "../hooks/useApi";
 import listingsApi from "../api/listings";
 import AppText from "../components/AppText";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
 	category: Yup.object().required().nullable().label("Category"),
@@ -78,7 +79,8 @@ const categories = [
 ];
 export default function ListingEditScreen() {
 	const [category, setCategory] = useState(null);
-	const [imageUris, setImageUris] = useState([]);
+	const [uploadVisible, setUploadVisible] = useState(false);
+	const [progress, setProgress] = useState(0);
 
 	const location = useLocation();
 	const { data, loading, error, request: postListing } = useApi(
@@ -86,12 +88,26 @@ export default function ListingEditScreen() {
 		true
 	);
 
-	const submitForm = (formSubmission) => {
+	const onAnimationFinish = () => {
+		setUploadVisible(false);
+		alert("Upload Successful!");
+	};
+
+	const submitForm = async (formSubmission, { resetForm }) => {
+		setProgress(0);
+		setUploadVisible(true);
+
 		const data = { ...formSubmission };
 		data.categoryId = formSubmission.category.value;
-		postListing(data, (progress) => {
-			console.log(progress);
+		const result = await postListing(data, (progress) => {
+			setProgress(progress);
 		});
+
+		if (!result.ok) {
+			setUploadVisible(false);
+			return alert("Could not save the listing");
+		}
+		resetForm();
 	};
 
 	useEffect(() => {
@@ -100,6 +116,11 @@ export default function ListingEditScreen() {
 
 	return (
 		<UIScreen backgroundColor="white" paddingHorizontal={10}>
+			<UploadScreen
+				onAnimationFinish={onAnimationFinish}
+				progress={progress}
+				visible={uploadVisible}
+			/>
 			<UIForm
 				initialValues={{
 					category,
@@ -152,11 +173,6 @@ export default function ListingEditScreen() {
 
 				<UIFormSubmitButton title={"POST"} />
 			</UIForm>
-			{data && (
-				<>
-					<AppText>It's a mother fucking success!</AppText>
-				</>
-			)}
 		</UIScreen>
 	);
 }
