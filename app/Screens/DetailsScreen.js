@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import AppText from "../components/AppText";
 import UIProfile from "../components/UIProfile";
 import UIScreen from "../components/UIScreen";
+import { Image } from "react-native-expo-image-cache";
 
 export default function DetailsScreen({ route }) {
 	const listing = route.params.item;
@@ -10,10 +11,7 @@ export default function DetailsScreen({ route }) {
 	return (
 		<UIScreen>
 			<View style={styles.imageWrapper}>
-				<Image
-					source={{ uri: listing.images[0].url }}
-					style={styles.mainImageStyle}
-				/>
+				<Image uri={listing.images[0].url} style={styles.mainImageStyle} />
 			</View>
 			<View style={styles.detailsWrapper}>
 				<View style={styles.descriptionWrapper}>

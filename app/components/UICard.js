@@ -4,9 +4,9 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Image,
 	TouchableOpacity,
 } from "react-native";
+import { Image } from "react-native-expo-image-cache";
 import AppText from "./AppText";
 
 export default function UICard({
@@ -18,7 +18,7 @@ export default function UICard({
 	return (
 		<TouchableOpacity style={styles.cardWrapper} onPress={onPress}>
 			<View style={styles.imageWrapper}>
-				<Image style={styles.mainImageStyle} source={{ uri: imageUrl }} />
+				<Image style={styles.mainImageStyle} uri={imageUrl} />
 			</View>
 			<View style={styles.priceDetails}>
 				<AppText size="small">{description}</AppText>
