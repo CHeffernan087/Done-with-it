@@ -13,17 +13,17 @@ export default function useApi(apiFunc, defer) {
 	}, []);
 
 	const request = async (...args) => {
-		console.log("making api call");
 		setLoading(true);
 		const response = await apiFunc(...args);
 		if (!response.ok) {
-			console.log("Some error has occured");
 			setError(response.problem);
 			setData(false);
+			return response;
 		} else {
 			setError(null);
 			setData(response.data);
 			setLoading(false);
+			return response;
 		}
 		return response;
 	};

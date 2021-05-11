@@ -1,25 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import colors from "../config/colors";
+import routes from "../routers/routes";
 import ListItem from "../components/lists/ListItem";
 import UIProfile from "../components/UIProfile";
 import UIScreen from "../components/UIScreen";
-import colors from "../config/colors";
 import UIListIcon from "../components/UIListIcon";
-import { FlatList } from "react-native-gesture-handler";
 import UIListItemSeparator from "../components/lists/UIListItemSeparator";
+import useAuth from "../auth/useAuth";
+import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import routes from "../routers/routes";
 
 export default function MyAccountScreen() {
+	const { user, logout } = useAuth();
 	const navigator = useNavigation();
-	const iconProps = { size: 30, color: colors.white };
 	return (
 		<UIScreen backgroundColor={colors.beige}>
 			<UIProfile
 				image={require("../assets/mosh.jpg")}
-				title="Mosh Hamedani"
-				subText={"programmingwithmosh@gmail.com"}
+				title={user.name}
+				subText={user.email}
 			/>
 			<FlatList
 				keyExtractor={(item) => item.title}
@@ -51,7 +52,7 @@ export default function MyAccountScreen() {
 							name: "logout",
 							backgroundColor: colors.yellow,
 						},
-						onPress: () => {},
+						onPress: logout,
 					},
 				]}
 				renderItem={({ item }) => (
