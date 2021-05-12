@@ -20,13 +20,13 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function RegisterScreen() {
-	const registerApi = useApi(usersApi.register);
-	const loginApi = useApi(authApi.login);
+	const registerApi = useApi(usersApi.register, true);
+	const loginApi = useApi(authApi.login, true);
 	const [formError, setFormError] = useState(null);
 	const { login } = useAuth();
 
 	const handleSubmit = async (userInfo) => {
-		const result = await registerApi.request();
+		const result = await registerApi.request(userInfo);
 		if (!result.ok) {
 			setFormError(result.data ? result.data.error : result.problem);
 		} else {
@@ -37,43 +37,47 @@ export default function RegisterScreen() {
 			login(authToken);
 		}
 	};
+	const formLoading = !formError && (registerApi.loading || loginApi.loading);
 	return (
-		<UIScreen backgroundColor="white" padding={15}>
-			<UIActivityLoader visible={registerApi.loading || loginApi.loading} />
-			<UIForm
-				initialValues={{ email: "", password: "", name: "" }}
-				onSubmit={handleSubmit}
-				validationSchema={validationSchema}
-			>
-				<UIFormField
-					name="name"
-					icon="account"
-					placeholder="Name"
-					autoCapitalize="words"
-					autoCorrect={false}
-					keyboardType="default"
-				/>
-				<UIFormField
-					name="email"
-					icon="email"
-					placeholder="Email"
-					autoCapitalize="none"
-					autoCorrect={false}
-					keyboardType="email-address"
-					textContentType="emailAddress"
-				/>
-				<UIFormField
-					autoCapitalize="none"
-					autoCorrect={false}
-					icon="lock"
-					name="password"
-					placeholder="password"
-					secureTextEntry
-					textContentType="password"
-				/>
-				<UIErrorMessage visible={!!formError} error={formError} />
-				<UIFormSubmitButton title={"REGISTER"} />
-			</UIForm>
-		</UIScreen>
+		<>
+			<UIScreen backgroundColor="white" padding={15}>
+				<UIForm
+					initialValues={{ email: "", password: "", name: "" }}
+					onSubmit={handleSubmit}
+					validationSchema={validationSchema}
+				>
+					<UIFormField
+						name="name"
+						icon="account"
+						placeholder="Name"
+						autoCapitalize="words"
+						autoCorrect={false}
+						keyboardType="default"
+					/>
+					<UIFormField
+						name="email"
+						icon="email"
+						placeholder="Email"
+						autoCapitalize="none"
+						autoCorrect={false}
+						keyboardType="email-address"
+						textContentType="emailAddress"
+					/>
+					<UIFormField
+						autoCapitalize="none"
+						autoCorrect={false}
+						icon="lock"
+						name="password"
+						placeholder="password"
+						secureTextEntry
+						textContentType="password"
+					/>
+					<UIErrorMessage visible={!!formError} error={formError} />
+
+					<UIFormSubmitButton title={"REGISTER"} />
+				</UIForm>
+			</UIScreen>
+			<UIActivityLoader visible={formLoading} />
+		</>
 	);
 }
