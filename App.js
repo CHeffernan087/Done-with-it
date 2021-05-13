@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,6 +11,7 @@ import OfflineNotice from "./app/components/UIOfflineNotice";
 import AuthContext from "./app/auth/context";
 import AppLoading from "expo-app-loading";
 import authStorage from "./app/auth/storage";
+import { navigationRef } from "./app/routers/rootNavigation";
 
 /*
 CMD + M => open developer tools
@@ -44,7 +45,7 @@ export default function App() {
 
 	return (
 		<AuthContext.Provider value={{ user, setUser }}>
-			<NavigationContainer>
+			<NavigationContainer ref={navigationRef}>
 				{user ? <AuthedRouter /> : <UnauthedRouter />}
 			</NavigationContainer>
 			<OfflineNotice />

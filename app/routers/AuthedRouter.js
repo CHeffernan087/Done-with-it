@@ -4,35 +4,18 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import routes from "./routes";
-import { Notifications } from "expo";
-import * as Permissions from "expo-permissions";
 
 /* Screen Components */
 import ListingEditScreen from "../Screens/ListingEditScreen";
 import FeedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
+import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 
 export default function AuthedRouter() {
-	const registerForNotifications = async () => {
-		try {
-			const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-			if (!permission.granted) {
-				return;
-			}
-
-			const notificationToken = await Notifications.getExpoPushTokenAsync();
-			console.log(notificationToken);
-		} catch (error) {
-			console.log("Error getting a push notification token", error);
-		}
-	};
-
-	useEffect(() => {
-		registerForNotifications();
-	}, []);
+	useNotifications();
 
 	return (
 		<Tab.Navigator
