@@ -1,15 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import AppText from "../components/AppText";
 import UIProfile from "../components/UIProfile";
 import UIScreen from "../components/UIScreen";
 import { Image } from "react-native-expo-image-cache";
+import ContactSellerForm from "../components/forms/ContactSellerForm";
 
 export default function DetailsScreen({ route }) {
 	const listing = route.params.item;
-	console.log(listing);
 	return (
 		<UIScreen>
+			{/* <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}> */}
 			<View style={styles.imageWrapper}>
 				<Image uri={listing.images[0].url} style={styles.mainImageStyle} />
 			</View>
@@ -25,7 +26,9 @@ export default function DetailsScreen({ route }) {
 					subText={"5 Listings"}
 					image={require("../assets/mosh.jpg")}
 				/>
+				<ContactSellerForm listing={listing} />
 			</View>
+			{/* </KeyboardAvoidingView> */}
 		</UIScreen>
 	);
 }
