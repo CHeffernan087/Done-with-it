@@ -18,7 +18,7 @@ CMD + M => open developer tools
 */
 
 export default function App() {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState();
 	const [isReady, updateIsReady] = useState(false);
 
 	const restoreUser = async () => {
